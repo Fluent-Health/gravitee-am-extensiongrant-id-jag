@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "id": "urn:jsonschema:io:fluenthealth:gravitee:am:extensiongrant:idjag:IdJagExtensionGrantConfiguration",
+  "description": "Accepts an Identity Assertion JWT Authorization Grant (ID-JAG, typ oauth-id-jag+jwt) at the token endpoint with grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer, as sent by MCP clients using enterprise-managed authorization. The assertion is checked against one trusted issuer, and the access token is issued for the existing user whose email it names. Set the extension grant to create users, with the identity provider below as its identity provider: the plugin only ever returns users it found, so nothing is created.",
+  "properties": {
+    "grantType": {
+      "title": "Grant Type",
+      "description": "The RFC 7523 JWT-bearer grant type.",
+      "type": "string",
+      "default": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      "readOnly": true
+    },
+    "issuer": {
+      "title": "Trusted issuer",
+      "description": "The one issuer whose assertions this grant accepts, compared exactly with the assertion's iss. Its keys come from <issuer>/.well-known/openid-configuration → jwks_uri. For Claude-issued assertions, the Issuer URL shown in Claude's managed authorization setup.",
+      "type": "string"
+    },
+    "audience": {
+      "title": "Audience",
+      "description": "This security domain's issuer, exactly as its discovery document publishes it (for example https://auth.example.com/my-domain/oidc). The assertion's aud must be exactly this one value.",
+      "type": "string"
+    },
+    "tenant": {
+      "title": "Tenant",
+      "description": "Optional. When set, the assertion's aud_tenant must equal it.",
+      "type": "string"
+    },
+    "domainId": {
+      "title": "Security domain id",
+      "description": "The id of this security domain, used to look the user up.",
+      "type": "string"
+    },
+    "dataPlaneId": {
+      "title": "Data plane id",
+      "description": "The data plane that holds this domain's users.",
+      "type": "string",
+      "default": "default"
+    },
+    "userSource": {
+      "title": "User source",
+      "description": "The id of the identity provider the users belong to. Only a user whose source is this provider can be signed in. Must be the same provider as the extension grant's identity provider.",
+      "type": "string"
+    },
+    "allowedEmailDomains": {
+      "title": "Allowed email domains",
+      "description": "Optional. When set, the assertion's email must end with @ and one of these domains.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "clockSkewSeconds": {
+      "title": "Clock skew (seconds)",
+      "description": "Tolerance applied to exp, iat and nbf.",
+      "type": "integer",
+      "default": 60
+    },
+    "maxAssertionLifetimeSeconds": {
+      "title": "Maximum assertion lifetime (seconds)",
+      "description": "An assertion whose exp is further than this after its iat is refused.",
+      "type": "integer",
+      "default": 300
+    },
+    "allowInsecureIssuer": {
+      "title": "Allow an http issuer (tests only)",
+      "description": "Accept an http:// issuer and jwks_uri. Never enable this outside a test environment.",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["issuer", "audience", "domainId", "userSource"]
+}
