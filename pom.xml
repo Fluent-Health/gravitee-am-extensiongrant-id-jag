@@ -29,7 +29,7 @@
         <assertj.version>3.27.7</assertj.version>
         <wiremock.version>3.5.4</wiremock.version>
         <testcontainers.version>1.21.4</testcontainers.version>
-        <jackson.version>2.18.2</jackson.version>
+        <jackson.version>2.18.11</jackson.version>
         <logback.version>1.5.12</logback.version>
 
         <prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
