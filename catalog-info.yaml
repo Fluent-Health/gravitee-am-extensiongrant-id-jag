@@ -22,7 +22,7 @@ metadata:
   description: Gravitee Access Management extension grant that accepts Identity Assertion JWT Authorization Grants (ID-JAG) for MCP enterprise-managed authorization.
   annotations:
     github.com/project-slug: Fluent-Health/gravitee-am-extensiongrant-id-jag
-    fluentinhealth.com/oss: pending
+    fluentinhealth.com/oss: published
 spec:
   type: library
   lifecycle: experimental
