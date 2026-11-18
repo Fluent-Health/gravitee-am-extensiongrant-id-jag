@@ -103,8 +103,12 @@ wrong provider. It finds nothing and creates a new user. Set both from the same 
   use one from this grant. Give the grant to a client without `refresh_token` if you don't want any.
 - **Removing someone from the issuer doesn't revoke tokens already issued.** Keep access tokens short, and disable the
   user in AM (for example through SCIM) so the next exchange is refused.
-- Built and tested against AM **4.12.7** (Java 25). The plugin uses AM's `DataPlaneRegistry`, an internal API, so
-  re-run the end-to-end test before moving to another AM version.
+- Compiled against the AM 4.12.7 API (the newest on Maven Central) and tested end to end against AM **4.12.13**
+  (Java 25). The user lookup tries AM's case-insensitive email lookup with the plain address, then exact matches on
+  the address as sent and lower-cased, so it doesn't depend on how a given AM version matches the case-insensitive
+  lookup. (1.0.0 pre-quoted the address for that lookup. AM 4.12.13 started quoting it itself, so 1.0.0 finds no
+  user on 4.12.13 and later.) The plugin uses AM's `DataPlaneRegistry`, an internal API, so re-run the end-to-end
+  test before moving to another AM version.
 
 ## Build and test
 

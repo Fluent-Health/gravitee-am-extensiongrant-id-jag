@@ -52,7 +52,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.MountableFile;
 
 /**
- * End-to-end check of the plugin inside a real AM 4.12.7 stack: management API, gateway and
+ * End-to-end check of the plugin inside a real AM 4.12.13 stack: management API, gateway and
  * MongoDB, with WireMock standing in for the assertion issuer (Claude's per-organization issuer in
  * production).
  *
@@ -71,7 +71,7 @@ public class IdJagAmE2EIT {
     private static final Network network = Network.newNetwork();
     private static final String MONGO_OPTS = "serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000";
     private static final String AM_MONGO_URI = "mongodb://mongodb-am:27017/gravitee?" + MONGO_OPTS;
-    private static final String AM_VERSION = System.getProperty("am.version", "4.12.7");
+    private static final String AM_VERSION = System.getProperty("am.version", "4.12.13");
     private static final String MGMT = "/management/organizations/DEFAULT/environments/DEFAULT";
 
     // As the AM gateway reaches it, inside the Docker network.
